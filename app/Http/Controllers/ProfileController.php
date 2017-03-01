@@ -19,4 +19,13 @@ class ProfileController extends Controller
 
       return redirect('/home');
     }
+
+    public function profileImage() {
+      $path = storage_path('app').'/avatar/'.Auth::user()->id.'/avatar.jpeg';
+      if (file_exists($path)) {
+        return response()->download($path);
+      } else {
+        return $path;
+      }
+    }
 }

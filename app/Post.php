@@ -9,7 +9,7 @@ class Post extends Model
     protected $table = "Post";
 
     public function owner() {
-      return $this->belongTo(User::class, 'ownerID');
+      return $this->belongsTo(User::class, 'ownerID');
     }
 
     public function comments() {

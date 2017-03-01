@@ -10,7 +10,7 @@ use App\Post;
 class PostController extends Controller
 {
     public function like($id) {
-      $post = Post:find($id);
+      $post = Post::find($id);
       $post->likes = $post->likes + 1;
 
       $post->save();
@@ -21,7 +21,7 @@ class PostController extends Controller
     public function post(Request $request) {
       $post = new Post();
       $post->ownerID = Auth::user()->id;
-      $post->body = $request->body();
+      $post->body = $request->body;
 
       $post->save();
 
