@@ -15,6 +15,7 @@ class AlterCommentTable extends Migration
     {
         Schema::table('Comment', function (Blueprint $table) {
           $table->foreign('ownerUser')->references('id')->on('users');
+          $table->foreign('ownerPost')->references('id')->on('Post');
         });
     }
 

@@ -25,3 +25,6 @@ Route::post('/post/new', 'PostController@post');
 
 Route::post('/profile/change', 'ProfileController@change');
 Route::get('/profile/image', 'ProfileController@profileImage');
+
+Route::get('/comment/like/{id}', 'CommentController@like');
+Route::post('/comment/new/{id}', 'CommentController@comment');

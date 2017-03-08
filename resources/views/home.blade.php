@@ -33,12 +33,30 @@
           {{-- Post --}}
           @foreach ($posts->get() as $post)
           <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-heading">
               <h4>{{$post->owner->name}} {{$post->owner->surname}}<br><small>{{date_format(date_create($post->created_at), "Y/m/d")}}</small></h4>
 
-                <p>{{$post->body}}</p>
-                <a href = "/like/{{$post->id}}"><strong>{{$post->likes}} Like(s)</strong></a>
+              <p>{{$post->body}}</p>
+              <a href = "/like/{{$post->id}}"><strong>{{$post->likes}} Like(s)</strong></a>
             </div>
+
+            {{-- Comment --}}
+            @foreach ($post->comments()->get() as $comment)
+            <div class="panel-body">
+              <h5>{{$comment->owner->name}} {{$comment->owner->surname}} said on {{date_format(date_create($comment->created_at), "Y/m/d h:i:s")}}</h5>
+              <p>{{$comment->body}}</p>
+              <a href = "/comment/like/{{$comment->id}}"><strong>{{$comment->likes}} Like(s)</strong></a>
+            </div>
+            @endforeach
+
+            {{-- Comment Box --}}
+            <form class="form-inline" action="/comment/new/{{$post->id}}" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <input size="93" type="text" class="form-control col-sm-10" id="comment" placeholder="Say something" name="commentbox">
+              </div>
+              {{csrf_field()}}
+              <button type="submit" class="btn btn-primary pull-right">Say</button>
+            </form>
           </div>
           @endforeach
         </div>
